@@ -1,90 +1,87 @@
-const API_URL = "https://YOUR-API.vercel.app";
-
-
-// GET ALL CARS
-async function loadCars() {
+const API_URL = "https://cloud-computing-activity.vercel.app";
+ 
+ 
+// GET ALL CHARACTERS
+async function loadCharacters() {
     try {
-        const response = await fetch(`${API_URL}/cars`);
+        const response = await fetch(`${API_URL}/characters`);
         const data = await response.json();
-        displayCars(data.cars);
+        displayCharacters(data.characters);
     }
-
+ 
     catch (error) {
         console.error(error);
-        document.getElementById("carList").innerHTML = "Unable to connect to the API.";
+        document.getElementById("characterList").innerHTML = "Unable to connect to the API.";
     }
 }
-
-
-// DISPLAY CARS
-function displayCars(cars) {
-    const carList =
-        document.getElementById("carList");
-
-    carList.innerHTML = "";
-
-    cars.forEach(car => {
+ 
+ 
+// DISPLAY CHARACTERS
+function displayCharacters(characters) {
+    const characterList =
+        document.getElementById("characterList");
+ 
+    characterList.innerHTML = "";
+ 
+    characters.forEach(character => {
         const card = document.createElement("div");
-        card.className = "car-card";
+        card.className = "character-card";
         card.innerHTML = `
-            <div class="car-year">${car.year}</div>
-            <h3>${car.make} ${car.model}</h3>
-            <p class="car-engine">${car.engine}</p>
-            <p>${car.horsepower} horsepower/p>
-            <p>${car.description}</p>
-            <button onclick="viewCar(${car.id})"> View Details</button>
+            <div class="character-year">${character.year}</div>
+            <h3>${character.name}</h3>
+            <p class="character-anime">${character.anime}</p>
+            <p>${character.moral_alignment}</p>
+            <p>${character.description}</p>
+            <button onclick="viewCharacter(${character.id})"> View Details</button>
         `;
-
-        carList.appendChild(card);
+ 
+        characterList.appendChild(card);
     });
-
+ 
 }
-
-// GET ONE CAR
-async function viewCar(id) {
-
+ 
+// GET ONE CHARACTER
+async function viewCharacter(id) {
+ 
     try {
-        const response = await fetch(`${API_URL}/cars/${id}`);
-        const car = await response.json();
-
+        const response = await fetch(`${API_URL}/characters/${id}`);
+        const character = await response.json();
+ 
         alert(`
-            ${car.year} ${car.make} ${car.model}
-            Engine:
-            ${car.engine}
-
-            Horsepower:
-            ${car.horsepower}
-
+            ${character.year} ${character.name} (${character.anime})
+            Moral Alignment:
+            ${character.moral_alignment}
+ 
             Description:
-            ${car.description}
+            ${character.description}
         `);
     }
     catch (error) {
         console.error(error);
-        alert("Unable to retrieve car.");
+        alert("Unable to retrieve character.");
     }
-
+ 
 }
-
+ 
 // SEARCH
-async function searchCars() {
-
+async function searchCharacters() {
+ 
     const query = document.getElementById("searchInput").value;
     if (!query) {
-        loadCars();
+        loadCharacters();
         return;
     }
     try {
         const response =
-            await fetch(`${API_URL}/cars/search?q=${encodeURIComponent(query)}`);
+            await fetch(`${API_URL}/characters/search?q=${encodeURIComponent(query)}`);
         const data = await response.json();
-        displayCars(data.results);
+        displayCharacters(data.results);
     }
-
+ 
     catch (error) {
         console.error(error);
         alert("Search failed.");
     }
 }
-
-loadCars();
+ 
+loadCharacters();
