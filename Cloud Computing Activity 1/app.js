@@ -53,6 +53,7 @@ function displayCharacters(characters) {
         card.className = "character-card";
         card.style.setProperty("--accent", accent);
         card.innerHTML = `
+            <div class="card-media"></div>
             <div class="card-eyebrow">
                 <span class="card-region">${character.region || "Unknown"}</span>
                 <span class="card-dot">&middot;</span>
@@ -116,6 +117,7 @@ function openModal(character) {
 
     modal.innerHTML = `
         <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+        <div class="modal-media"></div>
         <p class="modal-eyebrow">${character.region || "Unknown Region"}</p>
         <h3>${character.name}</h3>
         <p class="character-title">${character.title || ""}</p>
