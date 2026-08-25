@@ -1,6 +1,24 @@
 const API_URL = "https://cloud-computing-activity.vercel.app";
- 
- 
+
+
+// REGION -> ACCENT COLOR
+function getRegionColor(region) {
+    if (!region) return "var(--region-default)";
+    const r = region.toLowerCase();
+
+    if (r.includes("ionia")) return "var(--region-ionia)";
+    if (r.includes("noxus")) return "var(--region-noxus)";
+    if (r.includes("freljord")) return "var(--region-freljord)";
+    if (r.includes("targon")) return "var(--region-targon)";
+    if (r.includes("shurima")) return "var(--region-shurima)";
+    if (r.includes("void")) return "var(--region-void)";
+    if (r.includes("zaun")) return "var(--region-zaun)";
+    if (r.includes("bandle") || r.includes("spirit")) return "var(--region-bandle)";
+
+    return "var(--region-default)";
+}
+
+
 // GET ALL CHARACTERS
 async function loadCharacters() {
     try {
@@ -8,64 +26,130 @@ async function loadCharacters() {
         const data = await response.json();
         displayCharacters(data.characters);
     }
- 
+
     catch (error) {
         console.error(error);
-        document.getElementById("characterList").innerHTML = "Unable to connect to the API.";
+        document.getElementById("characterList").innerHTML = "Unable to reach the archive.";
     }
 }
- 
- 
+
+
 // DISPLAY CHARACTERS
 function displayCharacters(characters) {
     const characterList =
         document.getElementById("characterList");
- 
+
     characterList.innerHTML = "";
- 
+
+    if (!characters || characters.length === 0) {
+        characterList.innerHTML = "No champions found.";
+        return;
+    }
+
     characters.forEach(character => {
+        const accent = getRegionColor(character.region);
+
         const card = document.createElement("div");
         card.className = "character-card";
+        card.style.setProperty("--accent", accent);
         card.innerHTML = `
-            <div class="character-year">${character.year}</div>
+            <div class="card-eyebrow">
+                <span class="card-region">${character.region || "Unknown"}</span>
+                <span class="card-dot">&middot;</span>
+                <span class="card-faction">${character.faction || "Unaffiliated"}</span>
+            </div>
             <h3>${character.name}</h3>
-            <p class="character-anime">${character.anime}</p>
-            <p>${character.moral_alignment}</p>
-            <p>${character.description}</p>
-            <button onclick="viewCharacter(${character.id})"> View Details</button>
+            <p class="character-title">${character.title || ""}</p>
+            <p class="character-blurb">${character.personality || ""}</p>
+            <p class="character-origin">${character.race || "Unknown"} &middot; ${character.origin || "Unknown origin"}</p>
+            <button onclick="viewCharacter(${character.id})">View Full Entry</button>
         `;
- 
+
         characterList.appendChild(card);
     });
- 
+
 }
- 
+
 // GET ONE CHARACTER
 async function viewCharacter(id) {
- 
+
     try {
         const response = await fetch(`${API_URL}/characters/${id}`);
         const character = await response.json();
- 
-        alert(`
-            ${character.year} ${character.name} (${character.anime})
-            Moral Alignment:
-            ${character.moral_alignment}
- 
-            Description:
-            ${character.description}
-        `);
+        openModal(character);
     }
     catch (error) {
         console.error(error);
-        alert("Unable to retrieve character.");
+        alert("Unable to retrieve that champion's entry.");
     }
- 
+
 }
- 
+
+
+// MODAL
+function openModal(character) {
+    const accent = getRegionColor(character.region);
+    const overlay = document.getElementById("modalOverlay");
+    const modal = document.getElementById("modalContent");
+
+    modal.style.setProperty("--accent", accent);
+
+    let sections = "";
+
+    const addSection = (label, value) => {
+        if (!value) return;
+        sections += `
+            <div class="modal-section">
+                <h4>${label}</h4>
+                <p>${value}</p>
+            </div>
+        `;
+    };
+
+    addSection("Personality", character.personality);
+    addSection("Relationships", character.relationships);
+    addSection("Allies", character.allies);
+    addSection("Enemies", character.enemies);
+    addSection("Major Events", character.major_events);
+    addSection("Current Status", character.current_status);
+    addSection("Lore", character.lore);
+
+    modal.innerHTML = `
+        <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+        <p class="modal-eyebrow">${character.region || "Unknown Region"}</p>
+        <h3>${character.name}</h3>
+        <p class="character-title">${character.title || ""}</p>
+        <div class="modal-tags">
+            <span class="modal-tag">${character.race || "Unknown race"}</span>
+            <span class="modal-tag">${character.faction || "Unaffiliated"}</span>
+            <span class="modal-tag">${character.origin || "Unknown origin"}</span>
+        </div>
+        ${sections}
+    `;
+
+    overlay.classList.add("open");
+}
+
+function closeModal() {
+    document.getElementById("modalOverlay").classList.remove("open");
+}
+
+function closeModalOnBackdrop(event) {
+    if (event.target.id === "modalOverlay") {
+        closeModal();
+    }
+}
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        closeModal();
+    }
+});
+
+
 // SEARCH
 async function searchCharacters() {
- 
+
     const query = document.getElementById("searchInput").value;
     if (!query) {
         loadCharacters();
@@ -77,11 +161,11 @@ async function searchCharacters() {
         const data = await response.json();
         displayCharacters(data.results);
     }
- 
+
     catch (error) {
         console.error(error);
         alert("Search failed.");
     }
 }
- 
+
 loadCharacters();
