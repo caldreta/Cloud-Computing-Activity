@@ -1,40 +1,51 @@
 <!DOCTYPE html>
- 
+
 <html lang="en">
- 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Anime Character Finder</title>
-    <link rel="stylesheet" href="style.css" >
+    <title>Codex of Runeterra</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
- 
- 
+
+
 <body>
     <header>
-        <h1>🍥 Simple Anime Character Finder</h1>
-        <p> A website powered by a REST API </p>
+        <div class="header-inner">
+            <p class="eyebrow">A record kept across the regions</p>
+            <h1>Codex of Runeterra</h1>
+            <p class="tagline">Every champion who has shaped the war, the magic, and the myth of a fractured world.</p>
+        </div>
     </header>
     <main>
- 
+
         <!-- SEARCH -->
         <section class="search">
-            <input type="text" id="searchInput" placeholder="Search for an Anime Character...">
-            <button onclick="searchCharacters()"> Search </button>
-            <button class="secondary" onclick="loadCharacters()"> Show All </button>
- 
+            <input type="text" id="searchInput" placeholder="Search by name, region, or faction...">
+            <button onclick="searchCharacters()">Search</button>
+            <button class="secondary" onclick="loadCharacters()">Show All</button>
         </section>
- 
+
         <section>
-            <h2>Characters</h2>
+            <h2>The Roster</h2>
             <div id="characterList" class="character-list">
-                Loading characters...
+                Consulting the archive...
             </div>
         </section>
     </main>
- 
+
+    <!-- DETAIL MODAL -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnBackdrop(event)">
+        <div class="modal" id="modalContent" role="dialog" aria-modal="true">
+        </div>
+    </div>
+
     <footer>
-        <p> Data provided by the Simple Anime Character API </p>
+        <p>Entries drawn from the Runeterra Champion Archive</p>
     </footer>
     <script src="app.js"></script>
 </body>
