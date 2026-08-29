@@ -52,8 +52,12 @@ function displayCharacters(characters) {
         const card = document.createElement("div");
         card.className = "character-card";
         card.style.setProperty("--accent", accent);
+        const cardImg = character.image_url
+            ? `<img src="${API_URL}${character.image_url}" alt="${character.name}">`
+            : "";
+
         card.innerHTML = `
-            <div class="card-media"></div>
+            <div class="card-media">${cardImg}</div>
             <div class="card-eyebrow">
                 <span class="card-region">${character.region || "Unknown"}</span>
                 <span class="card-dot">&middot;</span>
@@ -95,6 +99,10 @@ function openModal(character) {
 
     modal.style.setProperty("--accent", accent);
 
+    const modalImg = character.image_url
+        ? `<img src="${API_URL}${character.image_url}" alt="${character.name}">`
+        : "";
+
     let sections = "";
 
     const addSection = (label, value) => {
@@ -117,7 +125,7 @@ function openModal(character) {
 
     modal.innerHTML = `
         <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
-        <div class="modal-media"></div>
+        <div class="modal-media">${modalImg}</div>
         <p class="modal-eyebrow">${character.region || "Unknown Region"}</p>
         <h3>${character.name}</h3>
         <p class="character-title">${character.title || ""}</p>
