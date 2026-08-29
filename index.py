@@ -203,7 +203,7 @@ characters = [
         "major_events": "Murders in Ionia, imprisonment by the Kinkou, release through Noxian manipulation, and return to his killings.",
         "current_status": "Active and pursuing his vision of murder as art.",
         "lore": "Jhin is a meticulous and theatrical murderer who believes killing is a form of art. Once known as the Golden Demon, he terrorized Ionia before being captured and imprisoned by the Kinkou. He was eventually released through the schemes of Noxian forces and returned to his deadly performances, treating every murder as part of a carefully constructed masterpiece.",
-        "image": "jhin.jpg"
+        "image": "jihn.jpg"
     },
     {
         "id": 12,
