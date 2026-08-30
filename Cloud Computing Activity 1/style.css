@@ -155,7 +155,7 @@ button.secondary:hover {
 .character-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-    gap: 22px;
+    gap: 36px;
 }
 
 .character-card {
