@@ -71,20 +71,11 @@ function displayCharacters(characters) {
         const gameFrameClass = getGameFrameClass(character.game);
         if (gameFrameClass) card.classList.add(gameFrameClass);
 
-        const gameCorners = gameFrameClass
-            ? `
-            <div class="game-corner tl"></div>
-            <div class="game-corner tr"></div>
-            <div class="game-corner bl"></div>
-            <div class="game-corner br"></div>`
-            : "";
-
         const cardImg = character.image_url
             ? `<img src="${API_URL}${character.image_url}" alt="${character.name}">`
             : "";
 
         card.innerHTML = `
-            ${gameCorners}
             <div class="card-media">${cardImg}</div>
             <div class="ignite-corner tl"></div>
             <div class="ignite-corner tr"></div>

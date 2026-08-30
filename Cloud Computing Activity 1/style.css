@@ -171,25 +171,11 @@ button.secondary:hover {
     transition: transform 0.15s ease, border-color 0.15s ease;
 }
 
-/* GAME FRAMES — static outer treatment, layered on top of the region border above */
+/* GAME FRAMES — static outer ring, kept clear of the region ignite corners above */
 
 .character-card.game-frame-lol {
-    box-shadow: 0 0 0 2px #0a0e16, 0 0 0 5px #c8a24c;
+    box-shadow: 0 0 0 7px #0a0e16, 0 0 0 10px #c8a24c;
 }
-
-.game-corner {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: #e8c878;
-    border-radius: 1px;
-    transform: rotate(45deg);
-    pointer-events: none;
-}
-.game-corner.tl { top: -7px; left: -7px; }
-.game-corner.tr { top: -7px; right: -7px; }
-.game-corner.bl { bottom: -7px; left: -7px; }
-.game-corner.br { bottom: -7px; right: -7px; }
 
 /* IGNITE EFFECT — hover brightens corners, click ignites all 4 edges inward */
 
