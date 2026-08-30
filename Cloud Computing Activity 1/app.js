@@ -19,6 +19,20 @@ function getRegionColor(region) {
 }
 
 
+// GAME -> BORDER FRAME CLASS
+function getGameFrameClass(game) {
+    if (!game) return "";
+    const g = game.toLowerCase();
+
+    if (g.includes("league of legends")) return "game-frame-lol";
+    // Add more games here later, e.g.:
+    // if (g.includes("mobile legends")) return "game-frame-ml";
+    // if (g.includes("dota")) return "game-frame-dota";
+
+    return "";
+}
+
+
 // GET ALL CHARACTERS
 async function loadCharacters() {
     try {
@@ -52,11 +66,25 @@ function displayCharacters(characters) {
         const card = document.createElement("div");
         card.className = "character-card";
         card.style.setProperty("--accent", accent);
+        card.dataset.id = character.id;
+
+        const gameFrameClass = getGameFrameClass(character.game);
+        if (gameFrameClass) card.classList.add(gameFrameClass);
+
+        const gameCorners = gameFrameClass
+            ? `
+            <div class="game-corner tl"></div>
+            <div class="game-corner tr"></div>
+            <div class="game-corner bl"></div>
+            <div class="game-corner br"></div>`
+            : "";
+
         const cardImg = character.image_url
             ? `<img src="${API_URL}${character.image_url}" alt="${character.name}">`
             : "";
 
         card.innerHTML = `
+            ${gameCorners}
             <div class="card-media">${cardImg}</div>
             <div class="ignite-corner tl"></div>
             <div class="ignite-corner tr"></div>
@@ -79,7 +107,7 @@ function displayCharacters(characters) {
             <p class="character-title">${character.title || ""}</p>
             <p class="character-blurb">${character.personality || ""}</p>
             <p class="character-origin">${character.race || "Unknown"} &middot; ${character.origin || "Unknown origin"}</p>
-            <button onclick="viewCharacter(${character.id})">View Full Entry</button>
+            <button>View Full Entry</button>
         `;
 
         characterList.appendChild(card);
@@ -169,15 +197,18 @@ document.addEventListener("keydown", (event) => {
 });
 
 
-// IGNITE CLICK EFFECT
+// IGNITE CLICK EFFECT + OPEN FULL ENTRY
 // Any click on a character card lights up its four edges (region-colored)
-// converging toward the middle, then fades back out.
+// converging toward the middle, then fades back out, and opens that
+// character's full entry.
 document.getElementById("characterList").addEventListener("click", (event) => {
     const card = event.target.closest(".character-card");
     if (!card) return;
 
     card.classList.add("igniting");
     setTimeout(() => card.classList.remove("igniting"), 900);
+
+    viewCharacter(card.dataset.id);
 });
 
 
