@@ -32,6 +32,7 @@ characters = [
         "allies": "Other Darkin and formerly the Ascended Host.",
         "major_events": "Ascension in Shurima, war against the Void, the Great Darkin War, imprisonment within the Darkin Blade, and possession of mortal hosts.",
         "current_status": "Active and seeking an apocalyptic end to his existence.",
+        "lore": "Aatrox was once one of Shurima's greatest Ascended warriors, fighting alongside the empire against the Void and becoming a legendary champion of its people. After Shurima's fall, however, the Ascended known as the Darkin turned against one another and waged a devastating war. Aatrox was eventually imprisoned within his own weapon, leaving his consciousness trapped within the Darkin Blade. Through possessing mortal hosts, he can once again take physical form, but every host is temporary and imperfect. Now consumed by hatred and despair, Aatrox seeks to destroy the world around him, believing that only an end to existence can finally free him from his cursed existence.",
         "image": "aatrox.jpg"
     },
     {
@@ -49,6 +50,7 @@ characters = [
         "allies": "The Order of Shadow.",
         "major_events": "Training under Kusho, discovering shadow magic, leaving the Kinkou, creating the Order of Shadow, and resisting Noxus.",
         "current_status": "Leader of the Order of Shadow and an influential defender of Ionia.",
+        "lore": "Zed was raised within the Kinkou Order under the guidance of its leader, Kusho, alongside Shen. Although he initially followed the Kinkou's teachings, Zed became frustrated by their refusal to use lethal force against threats to Ionia. His search for greater power eventually led him to forbidden shadow magic. Zed ultimately broke away from the Kinkou and established the Order of Shadow, training warriors who embraced more ruthless methods. Though considered a criminal by the Kinkou, Zed believes that his actions are necessary to protect Ionia from its enemies. His rivalry with Shen remains deeply personal, shaped by their shared history and opposing philosophies.",
         "image": "zed.jpg"
     },
     {
@@ -66,6 +68,7 @@ characters = [
         "allies": "Shen, Kennen, and former Kinkou members.",
         "major_events": "Kinkou training, the Noxian invasion, Zed's coup, and her departure from the Kinkou Order.",
         "current_status": "An independent assassin defending Ionia.",
+        "lore": "Akali was trained from a young age by the Kinkou Order, learning the art of assassination under Shen and Kennen. As Noxus invaded Ionia, she became increasingly dissatisfied with the Kinkou's methods and their hesitation to directly confront threats. Eventually, Akali abandoned the organization and chose to fight on her own terms. She continues to defend Ionia as a rogue assassin, relying on her speed, skill, and determination rather than the authority of an organization. Although she still respects those who trained her, Akali has made it clear that her path belongs to her alone.",
         "image": "akali.jpg"
     },
     {
@@ -83,6 +86,7 @@ characters = [
         "allies": "Primarily herself.",
         "major_events": "Manifestation of her magic, suppression by her mentor, imprisonment, escape, and emergence as the Dark Sovereign.",
         "current_status": "Free and wielding immense magical power.",
+        "lore": "Syndra was born with extraordinary magical power, but those around her feared what she might become. Her mentor attempted to suppress her abilities, teaching her that her strength was dangerous and needed to be controlled. Eventually, Syndra was imprisoned and her power was deliberately restrained. When she finally broke free, the years of suppression transformed her desire for freedom into an intense hatred of anyone who might attempt to control her again. Syndra now commands immense telekinetic power and lives independently, determined to ensure that no one will ever take away her freedom again.",
         "image": "syndra.jpg"
     },
     {
@@ -100,6 +104,7 @@ characters = [
         "allies": "Undead followers and those enslaved by his necromantic power.",
         "major_events": "Life as Sahn-Uzal, death, discovery of the afterlife, return to Runeterra, creation of an undead empire, defeat, and banishment.",
         "current_status": "Preparing to return and establish dominion over the living and dead.",
+        "lore": "Once known as Sahn-Uzal, Mordekaiser was a ruthless warlord who conquered vast territories during his mortal life. After his death, he discovered that the afterlife was not the glorious realm he had expected. Refusing to accept his fate, he used necromantic knowledge to return to the mortal world in an enormous suit of armor. Mordekaiser eventually established an empire built upon the dead, enslaving souls and seeking knowledge that would allow him to conquer both life and death itself. Though his enemies have defeated and banished him before, Mordekaiser has never truly been destroyed. His ultimate goal remains the creation of an eternal empire under his absolute rule.",
         "image": "mordekaiser.jpg"
     },
     {
@@ -117,6 +122,7 @@ characters = [
         "allies": "The celestial powers of Targon.",
         "major_events": "Becoming the Aspect of Twilight and serving as a messenger for cosmic events.",
         "current_status": "Active as the Aspect of Twilight.",
+        "lore": "Zoe was once an ordinary young girl who lived on Mount Targon, but her extraordinary curiosity eventually brought her to the attention of the celestial Aspect of Twilight. After becoming its host, Zoe gained immense cosmic power and ceased aging like an ordinary human. She travels across Runeterra with a playful and seemingly carefree attitude, often treating cosmic events as games. Despite her childish behavior, Zoe possesses tremendous power and can alter reality in ways that ordinary mortals cannot comprehend. As the Aspect of Twilight, she serves as a messenger between the celestial realm and the mortal world.",
         "image": "zoe.jpg"
     },
     {
@@ -134,6 +140,7 @@ characters = [
         "allies": "Rakkor warriors and mortal defenders.",
         "major_events": "Training as a Rakkor warrior, becoming host to the Aspect of War, surviving Aatrox's attack, and rejecting celestial authority.",
         "current_status": "Active as Atreus, fighting for mortals through his own strength.",
+        "lore": "Atreus was a Rakkor warrior who climbed Mount Targon and became the host of the celestial Aspect of War. Although the Aspect granted him incredible power, Atreus eventually discovered that celestial beings did not value mortal lives in the same way he did. During a confrontation with Aatrox, the Aspect of War was destroyed and Atreus was left seemingly dead. Against all odds, he survived through sheer determination. Refusing to surrender his identity to the celestial powers, Atreus now fights as Pantheon by his own will. He represents the strength of ordinary mortals who refuse to be controlled by gods or cosmic forces.",
         "image": "pantheon.jpg"
     },
     {
@@ -151,6 +158,7 @@ characters = [
         "allies": "Other Void creatures, although Kha'Zix primarily acts independently.",
         "major_events": "Emergence from the Void, hunting across Runeterra, evolution through consumption, and rivalry with Rengar.",
         "current_status": "Active Voidborn predator continually evolving through hunting.",
+        "lore": "Kha'Zix is a Voidborn predator that emerged into Runeterra with a single instinct: hunt and evolve. It stalks powerful creatures, consuming them and adapting its body to become an increasingly dangerous hunter. Kha'Zix's intelligence allows it to recognize weaknesses and change its physical form to overcome new challenges. Its most famous rivalry is with Rengar, a hunter who has dedicated himself to finding and killing increasingly powerful prey. To Kha'Zix, however, their conflict is more than a simple hunt—it is an opportunity to evolve by defeating one of Runeterra's greatest predators.",
         "image": "khazix.jpg"
     },
     {
@@ -168,6 +176,7 @@ characters = [
         "allies": "Voidborn creatures.",
         "major_events": "Development of prophetic visions, exposure to the Void, transformation into its prophet, and spreading Void influence.",
         "current_status": "Active servant and prophet of the Void.",
+        "lore": "Malzahar was once a wandering seer who possessed visions of events yet to come. His search for meaning eventually led him toward the ancient ruins of Icathia, where he encountered the overwhelming presence of the Void. The experience transformed him, granting him visions of a future in which the Void consumes Runeterra. Rather than resisting its influence, Malzahar embraced what he believed to be his destiny and became its prophet. He now travels across Shurima spreading the Void's influence and summoning its creatures, convinced that the destruction of the world is not an evil but an inevitable transformation.",
         "image": "malzahar.jpg"
     },
     {
@@ -185,6 +194,7 @@ characters = [
         "allies": "Hecarim, Thresh, the Black Mist, and corrupted followers.",
         "major_events": "Marriage to Isolde, Isolde's death, attempted resurrection, the Ruination, and the spread of the Black Mist.",
         "current_status": "The Ruined King and a major supernatural threat to Runeterra.",
+        "lore": "Viego was once a young king of Camavor whose greatest obsession was his wife, Isolde. When she died after being poisoned, Viego became consumed by grief and refused to accept her death. His attempt to restore Isolde using the waters of the Blessed Isles caused a catastrophic magical event known as the Ruination. The islands were corrupted and transformed into the Shadow Isles, while Viego himself became a wraith surrounded by the Black Mist. Centuries later, he returned to Runeterra and attempted to reunite with Isolde by force, spreading the Black Mist across the world. His obsession with recovering his lost love has made him one of Runeterra's greatest supernatural threats.",
         "image": "viego.jpg"
     },
     {
