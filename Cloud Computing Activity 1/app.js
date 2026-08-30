@@ -58,6 +58,18 @@ function displayCharacters(characters) {
 
         card.innerHTML = `
             <div class="card-media">${cardImg}</div>
+            <div class="ignite-corner tl"></div>
+            <div class="ignite-corner tr"></div>
+            <div class="ignite-corner bl"></div>
+            <div class="ignite-corner br"></div>
+            <div class="ignite-edge t-l"></div>
+            <div class="ignite-edge t-r"></div>
+            <div class="ignite-edge b-l"></div>
+            <div class="ignite-edge b-r"></div>
+            <div class="ignite-edge l-t"></div>
+            <div class="ignite-edge l-b"></div>
+            <div class="ignite-edge r-t"></div>
+            <div class="ignite-edge r-b"></div>
             <div class="card-eyebrow">
                 <span class="card-region">${character.region || "Unknown"}</span>
                 <span class="card-dot">&middot;</span>
@@ -154,6 +166,18 @@ document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
         closeModal();
     }
+});
+
+
+// IGNITE CLICK EFFECT
+// Any click on a character card lights up its four edges (region-colored)
+// converging toward the middle, then fades back out.
+document.getElementById("characterList").addEventListener("click", (event) => {
+    const card = event.target.closest(".character-card");
+    if (!card) return;
+
+    card.classList.add("igniting");
+    setTimeout(() => card.classList.remove("igniting"), 900);
 });
 
 
