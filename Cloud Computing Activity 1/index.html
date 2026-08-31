@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Codex of Runeterra</title>
+    <title>Codex of Champions</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
     <header>
         <div class="header-inner">
             <p class="eyebrow">A record kept across the regions</p>
-            <h1>Codex of Runeterra</h1>
+            <h1>Codex of Champions</h1>
             <p class="tagline">Every champion who has shaped the war, the magic, and the myth of a fractured world.</p>
         </div>
     </header>
@@ -28,6 +28,13 @@
             <input type="text" id="searchInput" placeholder="Search by name, region, or faction...">
             <button onclick="searchCharacters()">Search</button>
             <button class="secondary" onclick="loadCharacters()">Show All</button>
+            <select id="sortSelect" onchange="handleSortChange()">
+                <option value="default">SORT BY...</option>
+                <option value="name">Name</option>
+                <option value="game">Game</option>
+                <option value="region">Region</option>
+                <option value="faction">Faction</option>
+            </select>
         </section>
 
         <section>
@@ -45,7 +52,7 @@
     </div>
 
     <footer>
-        <p>Entries drawn from the Runeterra Champion Archive</p>
+        <p>Entries drawn from the Champion Archive</p>
     </footer>
     <script src="app.js"></script>
 </body>

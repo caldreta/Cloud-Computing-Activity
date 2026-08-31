@@ -106,6 +106,7 @@ h2 {
     border: 1px solid var(--border);
     border-radius: 4px;
     color: var(--text);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .search input::placeholder {
@@ -113,6 +114,40 @@ h2 {
 }
 
 .search input:focus {
+    outline: none;
+    border-color: var(--cyan);
+    box-shadow: 0 0 0 3px rgba(47, 217, 196, 0.15);
+    transform: translateY(-1px);
+}
+
+.search select {
+    padding: 13px 40px 13px 16px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background-color: transparent;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%238891a8' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 10px 7px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.2s ease;
+}
+
+.search select:hover {
+    border-color: var(--text-muted);
+    background-color: var(--panel-elevated);
+}
+
+.search select:focus {
     outline: none;
     border-color: var(--cyan);
     box-shadow: 0 0 0 3px rgba(47, 217, 196, 0.15);
@@ -155,7 +190,7 @@ button.secondary:hover {
 .character-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-    gap: 36px;
+    gap: 22px;
 }
 
 .character-card {
@@ -169,6 +204,19 @@ button.secondary:hover {
     position: relative;
     cursor: pointer;
     transition: transform 0.15s ease, border-color 0.15s ease;
+    animation: cardEntrance 0.4s ease backwards;
+    animation-delay: calc(var(--i, 0) * 30ms);
+}
+
+@keyframes cardEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* GAME FRAMES — static outer ring, kept clear of the region ignite corners above */
@@ -249,10 +297,35 @@ button.secondary:hover {
 
 .card-region {
     color: var(--accent, var(--region-default));
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
 }
 
 .card-faction {
     color: var(--text-muted);
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.card-region::before,
+.card-faction::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -60%;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.5s ease;
+    pointer-events: none;
+}
+
+.character-card:hover .card-region::before,
+.character-card:hover .card-faction::before {
+    left: 120%;
 }
 
 .card-dot {

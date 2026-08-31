@@ -1,5 +1,8 @@
 const API_URL = "https://cloud-computing-activity.vercel.app";
 
+let currentCharacters = [];
+let currentSortField = "default";
+
 
 // REGION -> ACCENT COLOR
 function getRegionColor(region) {
@@ -33,12 +36,34 @@ function getGameFrameClass(game) {
 }
 
 
+// SORT
+function sortCharacters(list, field) {
+    if (field === "default") return list;
+
+    return [...list].sort((a, b) => {
+        const av = (a[field] || "").toLowerCase();
+        const bv = (b[field] || "").toLowerCase();
+        return av.localeCompare(bv);
+    });
+}
+
+function renderList() {
+    displayCharacters(sortCharacters(currentCharacters, currentSortField));
+}
+
+function handleSortChange() {
+    currentSortField = document.getElementById("sortSelect").value;
+    renderList();
+}
+
+
 // GET ALL CHARACTERS
 async function loadCharacters() {
     try {
         const response = await fetch(`${API_URL}/characters`);
         const data = await response.json();
-        displayCharacters(data.characters);
+        currentCharacters = data.characters;
+        renderList();
     }
 
     catch (error) {
@@ -60,12 +85,13 @@ function displayCharacters(characters) {
         return;
     }
 
-    characters.forEach(character => {
+    characters.forEach((character, index) => {
         const accent = getRegionColor(character.region);
 
         const card = document.createElement("div");
         card.className = "character-card";
         card.style.setProperty("--accent", accent);
+        card.style.setProperty("--i", index);
         card.dataset.id = character.id;
 
         const gameFrameClass = getGameFrameClass(character.game);
@@ -215,7 +241,8 @@ async function searchCharacters() {
         const response =
             await fetch(`${API_URL}/characters/search?q=${encodeURIComponent(query)}`);
         const data = await response.json();
-        displayCharacters(data.results);
+        currentCharacters = data.results;
+        renderList();
     }
 
     catch (error) {
