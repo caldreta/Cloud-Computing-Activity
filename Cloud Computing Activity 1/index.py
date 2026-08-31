@@ -1,9 +1,10 @@
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI(
-    title="Simple Anime Character API",
-    description="A beginner-friendly REST API containing information about anime characters.",
+    title="Simple MOBA character, skins, and lore API",
+    description="A beginner-friendly REST API containing information about MOBA characters, skins, and lore.",
     version="1.0.0"
 )
 
