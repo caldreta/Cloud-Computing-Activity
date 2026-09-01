@@ -28,7 +28,7 @@ function getGameFrameClass(game) {
     const g = game.toLowerCase();
 
     if (g.includes("league of legends")) return "game-frame-lol";
-    // Add more games here later, e.g.:
+    // Add more games here later
     // if (g.includes("mobile legends")) return "game-frame-ml";
     // if (g.includes("dota")) return "game-frame-dota";
 
@@ -216,8 +216,6 @@ document.addEventListener("keydown", (event) => {
 
 // IGNITE CLICK EFFECT + OPEN FULL ENTRY
 // Any click on a character card lights up its four edges (region-colored)
-// converging toward the middle, then fades back out, and opens that
-// character's full entry.
 document.getElementById("characterList").addEventListener("click", (event) => {
     const card = event.target.closest(".character-card");
     if (!card) return;

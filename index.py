@@ -415,7 +415,6 @@ def get_characters():
 
 
 # SEARCH CHARACTERS
-# IMPORTANT: This must come BEFORE /characters/{character_id}
 @app.get("/characters/search")
 def search_characters(q: str = Query(..., min_length=1)):
     q = q.lower()
