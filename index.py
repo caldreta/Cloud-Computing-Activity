@@ -519,6 +519,7 @@ characters = validated_characters
 # SERVE /images/<filename> straight from the "images" folder (jpg, png, gif all work as-is)
 app.mount("/images", StaticFiles(directory="images"), name="images")
 
+#API Key Authentication
 def verify_api_key(x_api_key: Optional[str] = Header(default=None)):
     if x_api_key != API_KEY:
         raise HTTPException(
@@ -528,7 +529,7 @@ def verify_api_key(x_api_key: Optional[str] = Header(default=None)):
     return True
 
 def attach_image_url(character: dict) -> dict:
-    """Return a copy of character with a full image_url built from its image filename."""
+    #Return a copy of character with a full image_url built from its image filename.
     c = dict(character)
     filename = c.get("image")
     c["image_url"] = f"/images/{filename}" if filename else None
@@ -539,7 +540,7 @@ def attach_image_url(character: dict) -> dict:
 @app.get("/")
 def home():
     return {
-        "message": "Welcome to the Simple Anime Character API!",
+        "message": "Welcome to the Simple MOBA Character, Skins, Lore API!",
         "endpoints": [
             "/characters",
             "/characters/{id}",
@@ -547,9 +548,17 @@ def home():
         ]
     }
 
+@app.get("/health")
+def health_check():
+    return {
+        "status": "ok",
+        "service": "MOBA Character API",
+        "version": API_VERSION,
+        "timestamp": datetime.utcnow().isoformat() + "Z"
+    }
 
 # GET ALL CHARACTERS
-@app.get("/characters")
+@app.get("/api/v1/characters", dependencies=[Depends(verify_api_key)])
 def get_characters():
     result = [attach_image_url(c) for c in characters]
     return {
@@ -559,7 +568,7 @@ def get_characters():
 
 
 # SEARCH CHARACTERS
-@app.get("/characters/search")
+@app.get("/api/v1/characters/search", dependencies=[Depends(verify_api_key)])
 def search_characters(q: str = Query(..., min_length=1)):
     q = q.lower()
     results = []
@@ -569,6 +578,10 @@ def search_characters(q: str = Query(..., min_length=1)):
             f"{character['name']} "
             f"{character['region']} "
             f"{character['faction']}"
+            f"{character['role']}"
+            f"{character['attack_type']}"
+            f"{character['year_released']}"
+            f"{character['origin']}"
         ).lower()
 
         if q in searchable_text:
@@ -582,7 +595,7 @@ def search_characters(q: str = Query(..., min_length=1)):
 
 
 # GET ONE CHARACTER
-@app.get("/characters/{character_id}")
+@app.get("/api/v1/characters/{character_id}", dependencies=[Depends(verify_api_key)])
 def get_character(character_id: int):
     for character in characters:
         if character["id"] == character_id:

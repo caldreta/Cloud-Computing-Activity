@@ -1,4 +1,11 @@
-const API_URL = "https://cloud-computing-activity.vercel.app";
+const API_URL = "https://cloud-computing-activity.vercel.app/api/v1";
+const API_KEY = "arceo-api-key-123"
+
+const FETCH_OPTIONS = {
+    headers: {
+        "x-api-key": API_KEY
+    }
+};
 
 let currentCharacters = [];
 let currentSortField = "default";
@@ -60,7 +67,7 @@ function handleSortChange() {
 // GET ALL CHARACTERS
 async function loadCharacters() {
     try {
-        const response = await fetch(`${API_URL}/characters`);
+        const response = await fetch(`${API_URL}/characters`, FETCH_OPTIONS);
         const data = await response.json();
         currentCharacters = data.characters;
         renderList();
@@ -136,7 +143,7 @@ function displayCharacters(characters) {
 async function viewCharacter(id) {
 
     try {
-        const response = await fetch(`${API_URL}/characters/${id}`);
+        const response = await fetch(`${API_URL}/characters/${id}`, FETCH_OPTIONS);
         const character = await response.json();
         openModal(character);
     }
@@ -235,9 +242,14 @@ async function searchCharacters() {
         loadCharacters();
         return;
     }
+
     try {
         const response =
-            await fetch(`${API_URL}/characters/search?q=${encodeURIComponent(query)}`);
+            await fetch(
+                `${API_URL}/characters/search?q=${encodeURIComponent(query)}`,
+                FETCH_OPTIONS
+            );
+
         const data = await response.json();
         currentCharacters = data.results;
         renderList();
