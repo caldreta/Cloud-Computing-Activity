@@ -1,6 +1,5 @@
 from fastapi import FastAPI, HTTPException, Header, Query, Depends
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
 from datetime import datetime 
 from pydantic import BaseModel, Field
 from typing import Optional, Literal
@@ -515,9 +514,6 @@ characters = [
 # Validate the starting dataset when the application launches
 validated_characters = [Character(**character).model_dump() for character in characters]
 characters = validated_characters
-
-# SERVE /images/<filename> straight from the "images" folder (jpg, png, gif all work as-is)
-app.mount("/images", StaticFiles(directory="images"), name="images")
 
 #API Key Authentication
 def verify_api_key(x_api_key: Optional[str] = Header(default=None)):
