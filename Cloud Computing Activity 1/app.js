@@ -104,8 +104,8 @@ function displayCharacters(characters) {
         const gameFrameClass = getGameFrameClass(character.game);
         if (gameFrameClass) card.classList.add(gameFrameClass);
 
-        const cardImg = character.image_url
-            ? `<img src="${API_URL}${character.image_url}" alt="${character.name}">`
+        const cardImg = character.image
+            ? `<img src="${character.image}" alt="${character.name}">`
             : "";
 
         card.innerHTML = `
@@ -163,8 +163,8 @@ function openModal(character) {
 
     modal.style.setProperty("--accent", accent);
 
-    const modalImg = character.image_url
-        ? `<img src="${API_URL}${character.image_url}" alt="${character.name}">`
+    const modalImg = character.image
+        ? `<img src="${character.image}" alt="${character.name}">`
         : "";
 
     let sections = "";
