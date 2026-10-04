@@ -29,6 +29,8 @@ class Character(BaseModel):
     role: str = Field(min_length=1)
     weapon: str = Field(min_length=1)
     difficulty: Literal["Easy", "Medium", "Hard"]
+    skill_floor: Literal[1, 2, 3, 4, 5]
+    skill_ceiling: Literal[1, 2, 3, 4, 5]
     playstyle: Literal["Burst", "Sustained", "Poke", "Frontline", "Ambush", "Utility"]
     mobility: Literal["Low", "Medium", "High"]
     survivability: Literal["Squishy", "Sturdy", "Sustain-heavy"]
@@ -85,6 +87,8 @@ characters = [
         "team_dependence": "Self-Sufficient",
         "weapon": "Darkin Blade",
         "difficulty": "Medium",
+        "skill_floor": 3,
+        "skill_ceiling": 4,
         "year_released": 2013,
         "attack_type": "Melee"
     },
@@ -116,6 +120,8 @@ characters = [
         "team_dependence": "Self-Sufficient",
         "weapon": "Shuriken and Shadow Magic",
         "difficulty": "Hard",
+        "skill_floor": 4,
+        "skill_ceiling": 5,
         "year_released": 2012,
         "attack_type": "Melee"
     },
@@ -147,6 +153,8 @@ characters = [
         "team_dependence": "Self-Sufficient",
         "weapon": "Kunai and Kama",
         "difficulty": "Hard",
+        "skill_floor": 4,
+        "skill_ceiling": 5,
         "year_released": 2010,
         "attack_type": "Melee"
     },
@@ -178,6 +186,8 @@ characters = [
         "team_dependence": "Balanced",
         "weapon": "Dark Spheres",
         "difficulty": "Hard",
+        "skill_floor": 4,
+        "skill_ceiling": 4,
         "year_released": 2012,
         "attack_type": "Ranged"
     },
@@ -209,6 +219,8 @@ characters = [
         "team_dependence": "Self-Sufficient",
         "weapon": "Mace",
         "difficulty": "Medium",
+        "skill_floor": 2,
+        "skill_ceiling": 3,
         "year_released": 2010,
         "attack_type": "Melee"
     },
@@ -240,6 +252,8 @@ characters = [
         "team_dependence": "Balanced",
         "weapon": "Celestial Magic",
         "difficulty": "Hard",
+        "skill_floor": 4,
+        "skill_ceiling": 5,
         "year_released": 2017,
         "attack_type": "Ranged"
     },
@@ -271,6 +285,8 @@ characters = [
         "team_dependence": "Balanced",
         "weapon": "Spear and Shield",
         "difficulty": "Medium",
+        "skill_floor": 2,
+        "skill_ceiling": 3,
         "year_released": 2010,
         "attack_type": "Melee"
     },
@@ -302,6 +318,8 @@ characters = [
         "team_dependence": "Self-Sufficient",
         "weapon": "Claws",
         "difficulty": "Medium",
+        "skill_floor": 3,
+        "skill_ceiling": 4,
         "year_released": 2012,
         "attack_type": "Melee"
     },
@@ -333,6 +351,8 @@ characters = [
         "team_dependence": "Balanced",
         "weapon": "Void Magic",
         "difficulty": "Easy",
+        "skill_floor": 1,
+        "skill_ceiling": 2,
         "year_released": 2010,
         "attack_type": "Ranged"
     },
@@ -364,6 +384,8 @@ characters = [
         "team_dependence": "Self-Sufficient",
         "weapon": "Ruined Blade",
         "difficulty": "Medium",
+        "skill_floor": 3,
+        "skill_ceiling": 5,
         "year_released": 2021,
         "attack_type": "Melee"
     },
@@ -395,6 +417,8 @@ characters = [
         "team_dependence": "Team-Reliant",
         "weapon": "Whisper",
         "difficulty": "Hard",
+        "skill_floor": 3,
+        "skill_ceiling": 4,
         "year_released": 2016,
         "attack_type": "Ranged"
     },
@@ -426,6 +450,8 @@ characters = [
         "team_dependence": "Balanced",
         "weapon": "Hexplosives",
         "difficulty": "Medium",
+        "skill_floor": 2,
+        "skill_ceiling": 3,
         "year_released": 2012,
         "attack_type": "Ranged"
     },
@@ -457,6 +483,8 @@ characters = [
         "team_dependence": "Balanced",
         "weapon": "Vastayan Magic",
         "difficulty": "Medium",
+        "skill_floor": 2,
+        "skill_ceiling": 4,
         "year_released": 2011,
         "attack_type": "Ranged"
     },
@@ -488,6 +516,8 @@ characters = [
         "team_dependence": "Balanced",
         "weapon": "Celestial Magic",
         "difficulty": "Hard",
+        "skill_floor": 5,
+        "skill_ceiling": 5,
         "year_released": 2016,
         "attack_type": "Ranged"
     },
@@ -519,6 +549,8 @@ characters = [
         "team_dependence": "Team-Reliant",
         "weapon": "Forged Hammer",
         "difficulty": "Medium",
+        "skill_floor": 2,
+        "skill_ceiling": 3,
         "year_released": 2017,
         "attack_type": "Melee"
     },
@@ -550,6 +582,8 @@ characters = [
         "team_dependence": "Self-Sufficient",
         "weapon": "Claws and Lightning",
         "difficulty": "Medium",
+        "skill_floor": 2,
+        "skill_ceiling": 3,
         "year_released": 2011,
         "attack_type": "Melee"
     },
@@ -581,6 +615,8 @@ characters = [
         "team_dependence": "Balanced",
         "weapon": "Ice Magic",
         "difficulty": "Medium",
+        "skill_floor": 3,
+        "skill_ceiling": 4,
         "year_released": 2013,
         "attack_type": "Ranged"
     },
@@ -612,6 +648,8 @@ characters = [
         "team_dependence": "Balanced",
         "weapon": "Claws and Spikes",
         "difficulty": "Medium",
+        "skill_floor": 2,
+        "skill_ceiling": 2,
         "year_released": 2009,
         "attack_type": "Melee"
     },
@@ -643,6 +681,8 @@ characters = [
         "team_dependence": "Self-Sufficient",
         "weapon": "Chemtech Machinery and Shotgun Knees",
         "difficulty": "Medium",
+        "skill_floor": 3,
+        "skill_ceiling": 4,
         "year_released": 2010,
         "attack_type": "Ranged"
     },
@@ -674,6 +714,8 @@ characters = [
         "team_dependence": "Team-Reliant",
         "weapon": "Book of Thresholds and Magic",
         "difficulty": "Easy",
+        "skill_floor": 1,
+        "skill_ceiling": 3,
         "year_released": 2019,
         "attack_type": "Ranged"
     }
