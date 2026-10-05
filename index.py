@@ -954,7 +954,7 @@ characters = [
         "lore": "Azir was once the mortal emperor of ancient Shurima, an ambitious ruler who believed he was destined to become a godlike Ascended being. His arrogance contributed to the betrayal of his slave and former friend Xerath. During Azir's Ascension ceremony, Xerath seized the power for himself, causing the destruction of the empire and killing Azir. Thousands of years later, Azir was resurrected through the return of Shuriman magic and successfully completed his Ascension. Now an immortal emperor, Azir seeks to restore Shurima to its former glory while confronting Xerath and the consequences of his ancient ambitions.",
         "image": "azir.jpg",
         "role": "Mage",
-        "playstyle": "Sustained",
+        "playstyle": "Poke",
         "mobility": "Medium",
         "survivability": "Squishy",
         "mechanical_demand": "Auto-Attack Based",
