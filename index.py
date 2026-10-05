@@ -745,7 +745,7 @@ characters = [
         "image": "yuumi.jpg",
         "role": "Support / Mage",
         "playstyle": "Utility",
-        "mobility": "High",
+        "mobility": "Low",
         "survivability": "Squishy",
         "mechanical_demand": "Point-and-Click",
         "kit_complexity": "Low",
