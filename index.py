@@ -41,6 +41,8 @@ class Character(BaseModel):
     team_dependence: Literal["Self-Sufficient", "Balanced", "Team-Reliant"]
     year_released: int = Field(ge=1998, le=2150)
     attack_type: Literal["Melee", "Ranged"]
+    damage_type: Literal["AD", "AP"]
+    damage_source: Literal["Abilities", "Auto-Attacks"]
 
 
 
@@ -90,7 +92,9 @@ characters = [
         "skill_floor": 3,
         "skill_ceiling": 4,
         "year_released": 2013,
-        "attack_type": "Melee"
+        "attack_type": "Melee",
+        "damage_type": "AD",
+        "damage_source": "Abilities"
     },
     {
         "id": 2,
@@ -123,7 +127,9 @@ characters = [
         "skill_floor": 4,
         "skill_ceiling": 5,
         "year_released": 2012,
-        "attack_type": "Melee"
+        "attack_type": "Melee",
+        "damage_type": "AD",
+        "damage_source": "Abilities"
     },
     {
         "id": 3,
@@ -156,7 +162,9 @@ characters = [
         "skill_floor": 4,
         "skill_ceiling": 5,
         "year_released": 2010,
-        "attack_type": "Melee"
+        "attack_type": "Melee",
+        "damage_type": "AP",
+        "damage_source": "Abilities"
     },
     {
         "id": 4,
@@ -189,7 +197,9 @@ characters = [
         "skill_floor": 4,
         "skill_ceiling": 4,
         "year_released": 2012,
-        "attack_type": "Ranged"
+        "attack_type": "Ranged",
+        "damage_type": "AP",
+        "damage_source": "Abilities"
     },
     {
         "id": 5,
@@ -222,7 +232,9 @@ characters = [
         "skill_floor": 2,
         "skill_ceiling": 3,
         "year_released": 2010,
-        "attack_type": "Melee"
+        "attack_type": "Melee",
+        "damage_type": "AP",
+        "damage_source": "Abilities"
     },
     {
         "id": 6,
@@ -255,7 +267,9 @@ characters = [
         "skill_floor": 4,
         "skill_ceiling": 5,
         "year_released": 2017,
-        "attack_type": "Ranged"
+        "attack_type": "Ranged",
+        "damage_type": "AP",
+        "damage_source": "Abilities"
     },
     {
         "id": 7,
@@ -288,7 +302,9 @@ characters = [
         "skill_floor": 2,
         "skill_ceiling": 3,
         "year_released": 2010,
-        "attack_type": "Melee"
+        "attack_type": "Melee",
+        "damage_type": "AD",
+        "damage_source": "Abilities"
     },
     {
         "id": 8,
@@ -321,7 +337,9 @@ characters = [
         "skill_floor": 3,
         "skill_ceiling": 4,
         "year_released": 2012,
-        "attack_type": "Melee"
+        "attack_type": "Melee",
+        "damage_type": "AD",
+        "damage_source": "Abilities"
     },
     {
         "id": 9,
@@ -354,7 +372,9 @@ characters = [
         "skill_floor": 1,
         "skill_ceiling": 2,
         "year_released": 2010,
-        "attack_type": "Ranged"
+        "attack_type": "Ranged",
+        "damage_type": "AP",
+        "damage_source": "Abilities"
     },
     {
         "id": 10,
@@ -387,7 +407,9 @@ characters = [
         "skill_floor": 3,
         "skill_ceiling": 5,
         "year_released": 2021,
-        "attack_type": "Melee"
+        "attack_type": "Melee",
+        "damage_type": "AD",
+        "damage_source": "Auto-Attacks"
     },
     {
         "id": 11,
@@ -420,7 +442,9 @@ characters = [
         "skill_floor": 3,
         "skill_ceiling": 4,
         "year_released": 2016,
-        "attack_type": "Ranged"
+        "attack_type": "Ranged",
+        "damage_type": "AD",
+        "damage_source": "Auto-Attacks"
     },
     {
         "id": 12,
@@ -453,7 +477,9 @@ characters = [
         "skill_floor": 2,
         "skill_ceiling": 3,
         "year_released": 2012,
-        "attack_type": "Ranged"
+        "attack_type": "Ranged",
+        "damage_type": "AP",
+        "damage_source": "Abilities"
     },
     {
         "id": 13,
@@ -486,7 +512,9 @@ characters = [
         "skill_floor": 2,
         "skill_ceiling": 4,
         "year_released": 2011,
-        "attack_type": "Ranged"
+        "attack_type": "Ranged",
+        "damage_type": "AP",
+        "damage_source": "Abilities"
     },
     {
         "id": 14,
@@ -519,7 +547,9 @@ characters = [
         "skill_floor": 5,
         "skill_ceiling": 5,
         "year_released": 2016,
-        "attack_type": "Ranged"
+        "attack_type": "Ranged",
+        "damage_type": "AP",
+        "damage_source": "Abilities"
     },
     {
         "id": 15,
@@ -552,7 +582,9 @@ characters = [
         "skill_floor": 2,
         "skill_ceiling": 3,
         "year_released": 2017,
-        "attack_type": "Melee"
+        "attack_type": "Melee",
+        "damage_type": "AD",
+        "damage_source": "Abilities"
     },
     {
         "id": 16,
@@ -585,7 +617,9 @@ characters = [
         "skill_floor": 2,
         "skill_ceiling": 3,
         "year_released": 2011,
-        "attack_type": "Melee"
+        "attack_type": "Melee",
+        "damage_type": "AP",
+        "damage_source": "Abilities"
     },
     {
         "id": 17,
@@ -618,7 +652,9 @@ characters = [
         "skill_floor": 3,
         "skill_ceiling": 4,
         "year_released": 2013,
-        "attack_type": "Ranged"
+        "attack_type": "Ranged",
+        "damage_type": "AP",
+        "damage_source": "Abilities"
     },
     {
         "id": 18,
@@ -651,7 +687,9 @@ characters = [
         "skill_floor": 2,
         "skill_ceiling": 2,
         "year_released": 2009,
-        "attack_type": "Melee"
+        "attack_type": "Melee",
+        "damage_type": "AP",
+        "damage_source": "Abilities"
     },
     {
         "id": 19,
@@ -684,7 +722,9 @@ characters = [
         "skill_floor": 3,
         "skill_ceiling": 4,
         "year_released": 2010,
-        "attack_type": "Ranged"
+        "attack_type": "Ranged",
+        "damage_type": "AD",
+        "damage_source": "Auto-Attacks"
     },
     {
         "id": 20,
@@ -717,7 +757,9 @@ characters = [
         "skill_floor": 1,
         "skill_ceiling": 3,
         "year_released": 2019,
-        "attack_type": "Ranged"
+        "attack_type": "Ranged",
+        "damage_type": "AP",
+        "damage_source": "Abilities"
     },
     {
         "id": 21,
@@ -750,7 +792,9 @@ characters = [
         "skill_floor": 2,
         "skill_ceiling": 4,
         "year_released": 2009,
-        "attack_type": "Melee"
+        "attack_type": "Melee",
+        "damage_type": "AP",
+        "damage_source": "Abilities"
     },
     {
         "id": 22,
@@ -783,7 +827,9 @@ characters = [
         "skill_floor": 1,
         "skill_ceiling": 3,
         "year_released": 2009,
-        "attack_type": "Melee"
+        "attack_type": "Melee",
+        "damage_type": "AP",
+        "damage_source": "Abilities"
     },
     {
         "id": 23,
@@ -816,7 +862,9 @@ characters = [
         "skill_floor": 3,
         "skill_ceiling": 5,
         "year_released": 2009,
-        "attack_type": "Ranged"
+        "attack_type": "Ranged",
+        "damage_type": "AP",
+        "damage_source": "Abilities"
     },
     {
         "id": 24,
@@ -849,7 +897,9 @@ characters = [
         "skill_floor": 4,
         "skill_ceiling": 5,
         "year_released": 2019,
-        "attack_type": "Ranged"
+        "attack_type": "Ranged",
+        "damage_type": "AD",
+        "damage_source": "Auto-Attacks"
     },
     {
         "id": 25,
@@ -882,7 +932,9 @@ characters = [
         "skill_floor": 2,
         "skill_ceiling": 4,
         "year_released": 2009,
-        "attack_type": "Ranged"
+        "attack_type": "Ranged",
+        "damage_type": "AD",
+        "damage_source": "Auto-Attacks"
     },
     {
         "id": 26,
@@ -915,7 +967,9 @@ characters = [
         "skill_floor": 4,
         "skill_ceiling": 5,
         "year_released": 2014,
-        "attack_type": "Ranged"
+        "attack_type": "Ranged",
+        "damage_type": "AP",
+        "damage_source": "Auto-Attacks"
     },
     {
         "id": 27,
@@ -948,7 +1002,9 @@ characters = [
         "skill_floor": 3,
         "skill_ceiling": 5,
         "year_released": 2022,
-        "attack_type": "Melee"
+        "attack_type": "Melee",
+        "damage_type": "AD",
+        "damage_source": "Auto-Attacks"
     },
     {
         "id": 28,
@@ -981,7 +1037,9 @@ characters = [
         "skill_floor": 2,
         "skill_ceiling": 4,
         "year_released": 2023,
-        "attack_type": "Melee"
+        "attack_type": "Melee",
+        "damage_type": "AD",
+        "damage_source": "Auto-Attacks"
     },
     {
         "id": 29,
@@ -1014,7 +1072,9 @@ characters = [
         "skill_floor": 2,
         "skill_ceiling": 4,
         "year_released": 2014,
-        "attack_type": "Melee"
+        "attack_type": "Melee",
+        "damage_type": "AD",
+        "damage_source": "Auto-Attacks"
     },
     {
         "id": 30,
@@ -1047,7 +1107,9 @@ characters = [
         "skill_floor": 1,
         "skill_ceiling": 4,
         "year_released": 2009,
-        "attack_type": "Melee"
+        "attack_type": "Melee",
+        "damage_type": "AP",
+        "damage_source": "Abilities"
     },
     {
         "id": 31,
@@ -1080,7 +1142,9 @@ characters = [
         "skill_floor": 2,
         "skill_ceiling": 4,
         "year_released": 2011,
-        "attack_type": "Ranged"
+        "attack_type": "Ranged",
+        "damage_type": "AD",
+        "damage_source": "Auto-Attacks"
     },
     {
         "id": 32,
@@ -1113,7 +1177,9 @@ characters = [
         "skill_floor": 4,
         "skill_ceiling": 5,
         "year_released": 2016,
-        "attack_type": "Melee"
+        "attack_type": "Melee",
+        "damage_type": "AD",
+        "damage_source": "Auto-Attacks"
     },
     {
         "id": 33,
@@ -1146,7 +1212,9 @@ characters = [
         "skill_floor": 3,
         "skill_ceiling": 4,
         "year_released": 2010,
-        "attack_type": "Ranged"
+        "attack_type": "Ranged",
+        "damage_type": "AD",
+        "damage_source": "Auto-Attacks"
     },
     {
         "id": 34,
@@ -1179,7 +1247,9 @@ characters = [
         "skill_floor": 1,
         "skill_ceiling": 3,
         "year_released": 2009,
-        "attack_type": "Melee"
+        "attack_type": "Melee",
+        "damage_type": "AD",
+        "damage_source": "Auto-Attacks"
     },
     {
         "id": 35,
@@ -1212,7 +1282,9 @@ characters = [
         "skill_floor": 3,
         "skill_ceiling": 4,
         "year_released": 2012,
-        "attack_type": "Melee"
+        "attack_type": "Melee",
+        "damage_type": "AP",
+        "damage_source": "Abilities"
     },
     {
         "id": 36,
@@ -1245,7 +1317,9 @@ characters = [
         "skill_floor": 4,
         "skill_ceiling": 5,
         "year_released": 2012,
-        "attack_type": "Ranged"
+        "attack_type": "Ranged",
+        "damage_type": "AD",
+        "damage_source": "Auto-Attacks"
     },
     {
         "id": 37,
@@ -1278,7 +1352,9 @@ characters = [
         "skill_floor": 3,
         "skill_ceiling": 5,
         "year_released": 2015,
-        "attack_type": "Melee"
+        "attack_type": "Melee",
+        "damage_type": "AP",
+        "damage_source": "Abilities"
     },
     {
         "id": 38,
@@ -1311,7 +1387,9 @@ characters = [
         "skill_floor": 3,
         "skill_ceiling": 5,
         "year_released": 2009,
-        "attack_type": "Melee"
+        "attack_type": "Melee",
+        "damage_type": "AP",
+        "damage_source": "Abilities"
     },
     {
         "id": 39,
@@ -1344,7 +1422,9 @@ characters = [
         "skill_floor": 4,
         "skill_ceiling": 5,
         "year_released": 2012,
-        "attack_type": "Melee"
+        "attack_type": "Melee",
+        "damage_type": "AD",
+        "damage_source": "Auto-Attacks"
     },
     {
         "id": 40,
@@ -1377,7 +1457,9 @@ characters = [
         "skill_floor": 4,
         "skill_ceiling": 5,
         "year_released": 2009,
-        "attack_type": "Melee"
+        "attack_type": "Melee",
+        "damage_type": "AD",
+        "damage_source": "Abilities"
     }
 ]
 
