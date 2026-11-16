@@ -1,3 +1,10 @@
+import logging
+
+from fastapi import Request
+from fastapi.responses import JSONResponse
+from sqlalchemy.exc import OperationalError, SQLAlchemyError
+
+from config import ALLOWED_ORIGINS
 from datetime import datetime, timezone
 
 from fastapi import Depends, FastAPI, HTTPException, Query, Response
@@ -18,6 +25,8 @@ from security import (
     verify_password,
 )
 
+logger = logging.getLogger("api")
+
 app = FastAPI(
     title="MOBA Character and Game Hub API",
     description="Character data and player progress, backed by Supabase PostgreSQL.",
@@ -26,11 +35,34 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Phase 6: restrict to ALLOWED_ORIGINS
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=False,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PATCH", "DELETE"],
     allow_headers=["Authorization", "Content-Type", "X-API-Key"],
 )
+
+# ---------- Error handlers ----------
+
+@app.exception_handler(OperationalError)
+async def database_unavailable(request: Request, exc: OperationalError):
+    # Log the type only, so no connection details reach the logs or the client
+    logger.error("Database unavailable: %s", type(exc).__name__)
+    return JSONResponse(
+        status_code=503,
+        content={"detail": "The database is temporarily unavailable. Please try again later."},
+    )
+
+
+@app.exception_handler(SQLAlchemyError)
+async def database_error(request: Request, exc: SQLAlchemyError):
+    logger.error("Database operation failed: %s", type(exc).__name__)
+    return JSONResponse(status_code=500, content={"detail": "A database error occurred."})
+
+
+@app.exception_handler(Exception)
+async def unexpected_error(request: Request, exc: Exception):
+    logger.exception("Unexpected error")
+    return JSONResponse(status_code=500, content={"detail": "Internal server error."})
 
 
 @app.get("/")

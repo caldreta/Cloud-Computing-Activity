@@ -8,7 +8,7 @@ from config import DATABASE_URL
 engine = create_engine(
     DATABASE_URL,
     poolclass=NullPool,
-    connect_args={"prepare_threshold": None},
+    connect_args={"prepare_threshold": None, "connect_timeout": 10},
 )
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 
