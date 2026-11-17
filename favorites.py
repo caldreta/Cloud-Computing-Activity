@@ -1,7 +1,3 @@
-"""
-    from favorites import router as favorites_router      # top
-    app.include_router(favorites_router)                  # very bottom
-"""
 from collections import Counter
 from typing import List
 
