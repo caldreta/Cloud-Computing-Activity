@@ -121,3 +121,43 @@ def delete_user(conn, user_id: int) -> int:
     # user_progress rows are removed by ON DELETE CASCADE
     result = conn.execute(text("delete from users where id = :id"), {"id": user_id})
     return result.rowcount
+
+# ---------- Ranks and leaderboard ----------
+# Both read the "leaderboard" view and the "ranks" table (see ranks_and_leaderboard.sql).
+
+def list_ranks(conn):
+    rows = conn.execute(
+        text("select name, min_level from ranks order by min_level")
+    ).mappings()
+    return [dict(r) for r in rows]
+
+
+LEADERBOARD_COLUMNS = (
+    "place as position, username, total_exp, level, rank_name as rank"
+)
+
+
+def list_leaderboard(conn, limit: int):
+    # Players with no EXP yet are left off the board
+    rows = conn.execute(
+        text(
+            f"select {LEADERBOARD_COLUMNS} from leaderboard "
+            "where total_exp > 0 order by place, username limit :limit"
+        ),
+        {"limit": limit},
+    ).mappings()
+    return [dict(r) for r in rows]
+
+
+def count_ranked_players(conn) -> int:
+    return conn.execute(
+        text("select count(*) from leaderboard where total_exp > 0")
+    ).scalar_one()
+
+
+def get_standing(conn, user_id: int):
+    row = conn.execute(
+        text(f"select {LEADERBOARD_COLUMNS} from leaderboard where user_id = :id"),
+        {"id": user_id},
+    ).mappings().first()
+    return dict(row) if row else None

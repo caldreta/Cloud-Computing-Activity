@@ -72,3 +72,17 @@ def get_current_user(
     if user is None or not user["is_active"]:
         raise unauthorized
     return user
+
+
+def get_optional_user(
+    credentials: HTTPAuthorizationCredentials | None = Depends(_bearer),
+    conn=Depends(get_conn),
+):
+    # For public endpoints that add extra detail when a valid token is sent.
+    # A missing or bad token just means "not logged in", never an error.
+    if credentials is None:
+        return None
+    try:
+        return get_current_user(credentials, conn)
+    except HTTPException:
+        return None

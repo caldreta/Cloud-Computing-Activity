@@ -20,6 +20,7 @@ from security import (
     TOKEN_MINUTES,
     create_access_token,
     get_current_user,
+    get_optional_user,
     hash_password,
     verify_api_key,
     verify_password,
@@ -76,6 +77,8 @@ def home():
             "/api/v1/auth/register",
             "/api/v1/auth/login",
             "/api/v1/users/me",
+            "/api/v1/ranks",
+            "/api/v1/leaderboard",
         ],
     }
 
@@ -145,6 +148,27 @@ def login(body: LoginRequest, conn=Depends(get_conn)):
         "access_token": create_access_token(user["id"]),
         "token_type": "bearer",
         "expires_in": TOKEN_MINUTES * 60,
+    }
+
+
+# ---------- Ranks and leaderboard (public) ----------
+
+@app.get("/api/v1/ranks")
+def get_ranks(conn=Depends(get_conn)):
+    return {"ranks": crud.list_ranks(conn)}
+
+
+@app.get("/api/v1/leaderboard")
+def get_leaderboard(
+    limit: int = Query(50, ge=1, le=100),
+    user=Depends(get_optional_user),
+    conn=Depends(get_conn),
+):
+    # "me" is only filled in when a valid login token is sent
+    return {
+        "total_players": crud.count_ranked_players(conn),
+        "leaders": crud.list_leaderboard(conn, limit),
+        "me": crud.get_standing(conn, user["id"]) if user else None,
     }
 
 
