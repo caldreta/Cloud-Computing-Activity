@@ -1,11 +1,13 @@
 from typing import Literal, Optional
 
-from fastapi import APIRouter, Depends, HTTPException, Query, Response, status
+from fastapi import APIRouter, Depends, HTTPException, Query, Request, Response, status
+from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel, Field, model_validator
 from sqlalchemy import text
 from sqlalchemy.exc import IntegrityError
 
 from database import engine
+import storage
 from schemas import CharacterCreate, describe_form
 from security import get_current_user, hash_password
 
@@ -263,3 +265,50 @@ def admin_create_character(body: CharacterCreate, admin_id: int = Depends(get_cu
         # characters has a unique (game_id, name) constraint
         raise HTTPException(status_code=409, detail=f"{body.name} already exists for that game.")
     return dict(row)
+
+
+def _game_folder(game_id: int) -> str:
+    """Folder for a game's pictures: the first word of its name, like league/ for League of Legends."""
+    with engine.begin() as conn:
+        game = conn.execute(text("select name from games where id = :id"), {"id": game_id}).scalar_one_or_none()
+    if game is None:
+        raise HTTPException(status_code=404, detail="That game does not exist.")
+    return storage.slugify(game).split("-")[0] or f"game-{game_id}"
+
+
+@router.post("/api/v1/admin/images", tags=["Admin"])
+async def admin_upload_image(
+    request: Request,
+    game_id: int = Query(ge=1),
+    name: str = Query(min_length=1, max_length=100),
+    admin_id: int = Depends(get_current_admin),
+):
+    """Uploads a champion's picture. The request body is the raw image file.
+
+    The file is saved in the image storage bucket as <game folder>/<champion name>.<type> and the
+    path is returned, ready to be sent as `image` when the champion is created.
+    """
+    if not storage.is_configured():
+        raise HTTPException(status_code=503, detail="Image storage is not set up on the server yet.")
+    declared = request.headers.get("content-length")
+    if declared and declared.isdigit() and int(declared) > storage.MAX_BYTES:
+        raise HTTPException(status_code=413, detail="The picture must be 4 MB or smaller.")
+    data = await request.body()
+    if not data:
+        raise HTTPException(status_code=422, detail="No picture was sent.")
+    if len(data) > storage.MAX_BYTES:
+        raise HTTPException(status_code=413, detail="The picture must be 4 MB or smaller.")
+    content_type = storage.sniff_type(data)
+    if content_type is None:
+        raise HTTPException(status_code=415, detail="The picture must be a JPG, PNG or WebP file.")
+    slug = storage.slugify(name)
+    if not slug:
+        raise HTTPException(status_code=422, detail="The champion name needs letters or numbers.")
+
+    folder = await run_in_threadpool(_game_folder, game_id)
+    path = f"{folder}/{slug}.{storage.EXTENSIONS[content_type]}"
+    try:
+        await run_in_threadpool(storage.upload, path, data, content_type)
+    except storage.StorageError as error:
+        raise HTTPException(status_code=502, detail=str(error))
+    return {"image": path, "url": storage.public_url(path)}

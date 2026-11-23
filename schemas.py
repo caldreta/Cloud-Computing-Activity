@@ -63,8 +63,8 @@ class CharacterCreate(BaseModel):
     image: Optional[str] = Field(
         default=None, max_length=200, pattern=r"^[A-Za-z0-9_\-]+(/[A-Za-z0-9_\-]+)*\.(jpg|jpeg|png|webp)$",
         json_schema_extra={
-            "label": "Image file", "group": "Identity", "example": "league/zed.jpg",
-            "hint": "Path inside the website's images folder. Add the file to that folder too. Optional.",
+            "label": "Picture", "group": "Identity", "widget": "image",
+            "hint": "A JPG, PNG or WebP file up to 4 MB. It is uploaded to the database's image storage. Optional.",
         },
     )
     year_released: int = Field(
