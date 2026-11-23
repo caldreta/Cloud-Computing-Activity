@@ -242,7 +242,11 @@ def admin_character_form(admin_id: int = Depends(get_current_admin)):
     The fields come from the CharacterCreate schema, so the form always matches it.
     """
     with engine.begin() as conn:
-        games = conn.execute(text("select id, name from games order by id")).mappings().all()
+        # only games that have champions, so the form does not offer an empty game
+        games = conn.execute(text(
+            "select g.id, g.name from games g "
+            "where exists (select 1 from characters c where c.game_id = g.id) order by g.id"
+        )).mappings().all()
     return {"fields": describe_form(), "games": [dict(g) for g in games]}
 
 
