@@ -1,5 +1,6 @@
 import logging
-
+from admin import router as admin_router
+from favorites import router as favorites_router
 from fastapi import Request
 from fastapi.responses import JSONResponse
 from sqlalchemy.exc import OperationalError, SQLAlchemyError
@@ -211,3 +212,6 @@ def update_my_progress(
 def delete_my_account(user=Depends(get_current_user), conn=Depends(get_conn)):
     crud.delete_user(conn, user["id"])
     return Response(status_code=204)
+
+app.include_router(admin_router)
+app.include_router(favorites_router) 
