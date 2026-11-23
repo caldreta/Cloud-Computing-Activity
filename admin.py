@@ -6,6 +6,7 @@ from sqlalchemy import text
 from sqlalchemy.exc import IntegrityError
 
 from database import engine
+from schemas import CharacterCreate, describe_form
 from security import get_current_user, hash_password
 
 router = APIRouter()
@@ -227,3 +228,38 @@ def admin_delete_user(user_id: int, admin_id: int = Depends(get_current_admin)):
         # user_progress rows are removed by the foreign key's ON DELETE CASCADE
         conn.execute(text("delete from users where id = :id"), {"id": user_id})
     return Response(status_code=204)
+
+
+# ---------------------------------------------------------------------------
+# Characters: add a champion from the website
+# ---------------------------------------------------------------------------
+@router.get("/api/v1/admin/characters/form", tags=["Admin"])
+def admin_character_form(admin_id: int = Depends(get_current_admin)):
+    """Everything the website needs to draw the "add a champion" form.
+
+    The fields come from the CharacterCreate schema, so the form always matches it.
+    """
+    with engine.begin() as conn:
+        games = conn.execute(text("select id, name from games order by id")).mappings().all()
+    return {"fields": describe_form(), "games": [dict(g) for g in games]}
+
+
+@router.post("/api/v1/admin/characters", status_code=201, tags=["Admin"])
+def admin_create_character(body: CharacterCreate, admin_id: int = Depends(get_current_admin)):
+    data = body.model_dump()
+    # Column names come from the schema class above, never from the request, and values are bound parameters.
+    columns = list(data)
+    insert = (
+        f"insert into characters ({', '.join(columns)}) "
+        f"values ({', '.join(':' + c for c in columns)}) "
+        "returning id, name, title, image"
+    )
+    try:
+        with engine.begin() as conn:
+            if conn.execute(text("select 1 from games where id = :id"), {"id": body.game_id}).scalar() is None:
+                raise HTTPException(status_code=404, detail="That game does not exist.")
+            row = conn.execute(text(insert), data).mappings().one()
+    except IntegrityError:
+        # characters has a unique (game_id, name) constraint
+        raise HTTPException(status_code=409, detail=f"{body.name} already exists for that game.")
+    return dict(row)
