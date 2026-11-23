@@ -185,6 +185,8 @@ def read_my_progress(user=Depends(get_current_user), conn=Depends(get_conn)):
     return {
         "username": user["username"],
         "progress": [{**r, "level": level_for(r["exp"])} for r in rows],
+        # overall level and rank, stored by the database
+        "standing": crud.get_standing(conn, user["id"]),
     }
 
 
@@ -206,6 +208,8 @@ def update_my_progress(
         "exp_gained": gain,
         "exp": total,
         "level": level_for(total),
+        # the database trigger has already updated the player's rank
+        "standing": crud.get_standing(conn, user["id"]),
     }
 
 @app.delete("/api/v1/users/me", status_code=204)

@@ -127,13 +127,15 @@ def delete_user(conn, user_id: int) -> int:
 
 def list_ranks(conn):
     rows = conn.execute(
-        text("select name, min_level from ranks order by min_level")
+        text("select name, min_level, image from ranks order by min_level")
     ).mappings()
     return [dict(r) for r in rows]
 
 
+# rank_name and rank_image come from the ranks table through users.rank_id
 LEADERBOARD_COLUMNS = (
-    "place as position, username, total_exp, level, rank_name as rank"
+    "place as position, username, total_exp, level, "
+    "rank_name as rank, rank_image, next_rank_name as next_rank, next_rank_level"
 )
 
 
